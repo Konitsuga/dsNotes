@@ -81,3 +81,54 @@ $$$$
     - chmod 700 filename [give permission 7 to user and 0 to group and 0 to other]
 # What?
     What the hell is Symbolic Link and Hard Link?
+# Line Editor - ed
+- `Buffer` means all the lines that are already in the file and the lines that are appended in the editor but not written in the file yet.
+$$$$
+| Feature | Command|
+| :--- | :--- |
+| Show the Prompt | P |
+| Command Format | `[addr[,addr]]cmd[params]` |
+| commands for location | `2 . $ % + - , ; /RE/` |
+| name of the file| `f`
+| exit the input prompt | `.` |
+| current line| `.`|
+| previous line| `-`|
+| next line| `+`|
+| last line| `$`|
+| print the buffer | `%p`|
+| current line to end line of buffer | `;p` |
+| commands for editing | `f p a c d i j s m u` |
+| *exectute a shell command* | `!command` |
+| print date|  `!date`
+| temporarily save date line in terminal(buffer)| `r !date` |
+| write the buffer into file| `w` |
+| edit a file | `e filename` |
+| read file contents into buffer | `r filename` |
+| read *command* output into buffer | `r !command` |
+| write buffer to filename | `w filename` |
+| mover the current line to 0th line | `m0`|
+| undo the changes| `u`|
+| delete the current line | `d`|
+| quit | `q` |
+
+# Editor - Vim
+- u [undo changes]
+- dd [delete/cut current line]
+- nx [delete n characters including under the cursor]
+- x [delete character under the cursor]
+- dw [delete the word under the cursor if cursor is under the first char, otherwise delete the remaining character. ]
+- yy [copy the current line]
+- nyy [copy the next n lines including the current line]
+- r [char] [replace char under the cursor with new char]
+- :se nu [shows line numbering]
+- :1,5s/line/LINE/ [substitute the first word "line" in each of the lines from 1 to 5]
+- :1,5s/line/LINE/g [all the words "line" from 1 to 5]
+- :%s/line/LINE/g [Replace everywhere]
+- p [paste the copied/cut line]
+- 0 [start of the current line]
+- $ [end of the current line]
+- nw [nth after word after the current word]
+- w [beggining of next word]
+- b [beggining of preceding word]
+- :0 [first line in the file]
+- :$ [last line in the file]
