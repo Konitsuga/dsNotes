@@ -245,7 +245,7 @@ Package priorities
 - dpkg -s package1 [Report the status and description about what package1 does; same as `apt-cache show`]
 - dpkg -S pattern1 [which package brought a particular file]
 - man dpkg -query
-- dpkg-query -W -f='${Section} ${binary:Package}\n' | less [list packages in the format: sectionName packageName]
+- dpkg-query -W -f'${Section} ${binary:Package}\n' | less [list packages in the format: sectionName packageName]
 
 - ps --forest [prints running processes in parent-child form]
 - sleep 30 [pause the terminal for 30 seconds]
@@ -263,6 +263,120 @@ Package priorities
 - echo $? [returns "0" if the last command was executed successfully otherwise 1-255. Returns exit/status code]
 - ps [processes owned by the current user running inside the current shell/terminal]
 - ps --forest [sames as `ps` but in parent-child format]
+- ps auxf [detailed version of ps --forest]
 - ps -e [system-wide processes]
 - exit integer1 [sets exit/status code to (integer1%256)]
 - bc [bench calculator: terminal's calculator]
+- tee file1 [writes in stdout(screen) and file1]
+
+|å|ß|
+|--|--|
+| . | Any single character except null or newline |
+| * | Zero or more of the preceding character / expression |
+| [ ] | Any of the enclosed characters; hyphen (-) indicates character range |
+| ^ | Anchor for beginning of line or negation of enclosed characters |
+| $ | Anchor for end of line |
+| \ | Escape special characters |
+| \{n,m\} | Range of occurances of preceding pattern at least n and utmost m times |
+| \(\) | Grouping of regular expressions |
+
+# Special characters (ERE)
+| å|∫|
+|--|--|
+| {n,m} | Range of occurances of preceding pattern at least n and utmost m times |
+| () | Grouping of regular expressions |
+| + | One or more of preceding character / expression |
+| ? | Zero or one of preceding character / expression |
+| \| | Logical OR over the patterns |
+
+|command|feature|command|feature|
+|--|--|--|--|
+| [[:print:]] | Printable  character| [[:blank:]] | Space / Tab |
+| [[:alnum:]] | Alphanumeric | [[:space:]] | Whitespace |
+| [[:alpha:]] | Alphabetic | [[:punct:]]  | Punctuation |
+| [[:lower:]] | Lower case | [[:xdigit:]] | Hexadecimal |
+| [[:upper:]] | Upper case | [[:graph:]] | Non-space |
+| [[:digit:]] | Decimal digits | [[:cntrl:]] | Control characters |
+
+# Backreferences
+
+* `\1` through `\9`
+* `\n` matches whatever was matched by nth earlier paranthesized subexpression
+* A line with two occurances of hello will be matched using:
+  `\(hello\).*\1`
+
+# BRE operator precedence
+
+| Level | Operator / Description |
+| :--- | :--- |
+| **highest** | `[. .]` `[==]` `[::]` char collation |
+| | `\metachar` |
+| | `[ ]` Bracket expansion |
+| | `\( \)` `\n` subexpressions and backreferences |
+| | `*` `\{ \}` Repetition of preceding single char regex |
+| | Concatenation |
+| **lowest** | `^` `$` anchors |
+
+# ERE operator precedence
+
+| Level | Operator / Description |
+| :--- | :--- |
+| **highest** | `[. .]` `[==]` `[::]` char collation |
+| | `\metachar` |
+| | `[ ]` Bracket expansion |
+| | `( )` grouping |
+| | `*` `+` `?` `{ }` Repetition of preceding regex |
+| | Concatenation |
+| | `^` `$` anchors |
+| **lowest** | `\|` alternation |
+
+
+#
+- grep 'string1' file1 [prints all lines having 'string1' in file1]
+- grep -n 'string1' file1 [prints the line number and the line having 'string1']
+- cat file1 | grep 'string1' [same as above]
+- cat file1 | grep 'S.n' [e.g. 'Ramesh Singh']
+- cat file1 | grep '.am' [There should be some character before 'am'. eg1: 'Nambiar Reddy'; eg2: 'Mary Manickam']
+- cat file1 | grep '.am$' ['am' is at the end of the line. e.g. 'Mary Manickam']
+- cat file1 | grep '.am\b' ['am' is at the end of the word. e.g. 'Mary Manickam']
+- cat file1 | grep '.am\b' ['Mar' is at the start of the word. e.g. 'Mary Manickam']
+- cat file1 | grep 'he[lyo]' [The string should contain 'he' then any of the characters in 'lyo']
+- cat file1 | grep '\.' [Should contain '.' ; e.g. 'Charles M. Singh']
+- cat file1 | grep -i 'string1' [case insensitive]
+- cat file1 | grep 'w.*z' ['wiz', 'wingz']
+- cat file1 | grep 'string[1-4]' [must be in range 1 to 4. eg. 'string3']
+- cat file1 | grep 'string[^1-4]' [must not be in range 1 to 4.  eg. 'string7']
+- cat file1 | grep 'M\{3\}' [M should appear at least 3 times together.]
+- cat file1 | grep 'M\{3,5\}' [M should appear >=3 and <=5 times together.]
+- cat file1 | grep '\(am\)\{2\}' ['am' must be 2 times together]
+- cat file1 | grep '\(am\)\2' [different from the above ]
+- cat file1 | grep '[[:alnum:]]' [prints the line which has either or both apha, numeric characters in it.]
+- cat file1 | grep '^[[:digit:]]' [the line which has first character digit]
+- cat file1 | grep '[^[:cntrl:]]' [the lines which doesn't have any control character]
+- cat file1 | grep '[^[:punct:]]$' [for no puctuation at end of the line]
+---------
+- cat file1 | egrep 'M+' [at least one 'M' in the line.]
+- cat file1 | egrep '(ma)+' [at least one 'ma' in the line.]
+- cat file1 | egrep '^M+' [First character in the line should be 'M' and there should be at least one 'M' in the line.]
+- cat file1 | egrep '\b[[:digit:]]{6}\b' [exactly six digits]
+- cat file1 | egrep '(string1 | string2)' [either string1 is present or string2 in the line.]
+- cat file1 | egrep '^$' [prints the empty lines]
+- cat file1 | egrep -v '^$' [skips  the empty lines]
+-------
+- cut -c 2-5 file1 [prints from the 2nd to the 5th character of each line]
+- cut -d ';' -f 2 [prints the 2nd field seperated by the delimitor ';']
+-------
+- find . [finds every file/directory in current directory]
+- find . -type d [types of directories in current directory]
+- find . type f -name "test.txt" [returns the types of all the files having the name "test.txt"]
+- find . type f -name "*.jpg" -maxdepth 1 [return only the directories upto 1st depth and not its further subdirectories]
+- find . -type f -name "tes*" [returns the types of all the files having the name starting from "tes"]
+- find . -type f -iname "tes*" [for case-insensitive searching]
+- find . -type f -mmin -10 [finds files that were modified <10 mins ago]
+- find . -type f -mmin +1 -mmin -5 [finds files that were modified >1 and <5 mins ago]
+- find . -type f -mtime +1 -mtime -5 [in days]
+- -mmin -mtime -amin -atime -cmin -ctime
+- find . -size +5M [searches for files >5MB]
+- find . -perm 777 [searches for files having 777 permissions]
+- find directory1 -type d -exec chmod 775 {} + [group all found paths of all the directories inside directory1 and execute chmod 775 once.]
+- find . -type f -name "*.jpg" -maxdepth 1 -exec rm {} + [only delete .txt files of the current directory]

@@ -96,3 +96,86 @@ let description = ({name, shape='Spherical'}) => {
     console.log(`${name} is ${shape}`)
 }
 description(fruit)
+
+//for-loop 
+// let arr4 = [56, 'arrow', "3", 'z']
+// for (let i in arr4) {   //iterates index
+//   console.log(i);
+//   console.log(arr4[i]);
+// }
+// for (let i of arr4) {   //iterates elements
+//   console.log(i);
+//   console.log(arr4[i]);
+// }
+
+//
+// console.log(Object.keys(arr4)); //index of arr4
+// console.log(Object.values(arr4)); //elements of arr4
+// console.log(Object.entries(arr4)); //index and elements of arr4
+// //
+// console.log(Object.keys(obj1));
+// console.log(Object.values(obj1)); //elements of obj1
+// console.log(Object.entries(obj1)); //index and elements of obj1
+
+// //Destructuring
+// let arr4 = [56, 'arrow', "3", 'x']
+// let arr5 = [57, 'brrow', "4", "y"]
+// // let [a, b] = arr4;
+// // let [a, , b] = arr4;
+// // let [a, ...b] = arr4;
+// //
+// // let myarr = [arr4, 7, 8, 9]
+// let myarr = [...arr4, 7, 8, 9]
+// // let myarr = [7, 8, 9, ...arr5]
+// console.log(myarr);
+// // console.log(a)
+// // console.log(b);
+
+
+// //Destructuring - objects
+// const obj2 = {
+//   prop1: "Diploma",
+//   prop2: "Degree",
+//   prop3: "Foundation"
+// }
+// console.log(obj2.prop3);
+// let {prop1, prop2} = obj2;
+// console.log(prop2);
+// // console.log(obj1.b)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// fruit = {
+//     name: "Apple",
+//     shape: "Round"
+// }
+// let description = ({name, shape='Spherical'}) => {
+//     console.log(`${name} is ${shape}`)
+// }
+// description(fruit)
+
+// a = {
+//     name: 'Abi',
+//     age: 22
+// };
+// b = [];
+// for (let i = 0; i < 3; i++){
+//     b.push({...a})
+// }
+// console.log(b)
+// console.log(b[0])
+// console.log(b[1])
+// b[1].name = 'Akshay';
+// console.log(b[0].name);
