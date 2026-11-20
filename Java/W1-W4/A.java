@@ -266,3 +266,48 @@ class TestBook {
         System.out.println(b2);
     }
 }
+class TestBook {
+    public void main(String[] args) {
+        Book b1 = new Book();
+        Book b2 = new Book("Java Programming", "Riya");
+
+        b1.setAuthor("Diya");
+
+        System.out.println(b1);
+        System.out.println(b2);
+    }
+}
+class FClasss{
+     public static void main(String[] args) {
+              int[] a = {1, 2, 3};
+              int[] b = a;
+              System.out.print(a == b);
+      }
+}
+class F3 {
+    public static void main(String[] args) {
+        String[] str1 = {"apple", "banana", "guava"};
+        System.out.println(str1[1]);
+    }
+}
+
+class SClass{
+          int i = 10;
+          public SClass(int _i) { i = 20; }
+          public void print() { System.out.println(i); }
+}
+class PQ{
+       public static void main(String[] args) {
+             int i = 30;
+             SClass obj = new SClass(i);
+             obj.print();
+     }
+}
+class H {
+    public static void main(String[] args) {
+        int[] ari = {1, 3, 2, 5, 4};
+        for (int numb: ari) {
+            System.out.println(numb);
+        }
+    }
+}
