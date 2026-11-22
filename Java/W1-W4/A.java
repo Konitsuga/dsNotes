@@ -8,6 +8,8 @@
 // Running - Executes the compiled bytecode (runs the main method of the class) - java publicClass or java classHavingmainMethod
 // Compiling & Running - Compiles in memory and runs single-file code directly - java publicClass.java
 // static - call a method of a class without creating an object of that class
+import java.io.Console;
+import java.util.Scanner;
 
 public class A{
     public static void main(String[] args) {
@@ -220,7 +222,7 @@ class WhileEx2 {
         } while (i > 0);
     }
 }
-class FClass {
+class F {
     public static void main(String args[]) {
         int arr[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         // int n = 9;
@@ -244,7 +246,7 @@ class Book {
     public Book(String t, String a) {
         title = t;
         author = a;
-    }
+    }     
     public void setTitle(String t) {
         title = t;
     }
@@ -266,18 +268,7 @@ class TestBook {
         System.out.println(b2);
     }
 }
-class TestBook {
-    public void main(String[] args) {
-        Book b1 = new Book();
-        Book b2 = new Book("Java Programming", "Riya");
-
-        b1.setAuthor("Diya");
-
-        System.out.println(b1);
-        System.out.println(b2);
-    }
-}
-class FClasss{
+class FClass{
      public static void main(String[] args) {
               int[] a = {1, 2, 3};
               int[] b = a;
@@ -310,4 +301,308 @@ class H {
             System.out.println(numb);
         }
     }
+}
+
+class I {
+    public static void main(String[] args) {
+        Console console = System.console();
+        String username = console.readLine("User name: ");
+        char[] password = console.readPassword("Password: ");
+        System.out.println("Hello" + username + "!");
+    }
+}
+
+class J {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a word: ");
+        String word = scanner.nextLine();
+        System.out.println("You entered: " + word);
+
+        int num = scanner.nextInt();
+        System.out.println("You entered: " + num);
+    }
+}
+
+class K {
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    String s1 = sc.next();
+    evenDisplay(s1);
+  }
+//Define evenDisplay(String) method here
+    public static void evenDisplay(String args) {
+        for (int i=0; i<=args.length(); i+=2) {
+            System.out.println(args.charAt(i));
+        }
+    }
+}
+
+
+class Calculator{
+    // Fill the code
+    double a;
+    double b;
+    
+    void sum(double a, double b) {
+        System.out.println(a +b);
+    }
+    void subtraction(double a, double b) {
+        System.out.println(a -b);
+    }
+    void multiply(double a, double b) {
+        System.out.println(a*b);
+    }
+    void division(double a, double b) {
+        System.out.println(a/b);
+    }
+}
+class UpdatedCalculator extends Calculator{
+    // Fill the code
+    void remainder(double a, double b) {
+        System.out.println(a % b);
+    }
+} 
+class CalculatorCheck{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double n1 = sc.nextDouble();
+        double n2 = sc.nextDouble();
+        Calculator c = new Calculator();
+        c.sum(n1, n2);
+        c.subtraction(n1, n2);
+        c.multiply(n1, n2);
+        c.division(n1, n2);
+        UpdatedCalculator uc = new UpdatedCalculator();
+        uc.remainder(n1, n2);
+    }
+
+}
+
+
+class Employee {
+    public int getBonus() {
+        return 0;
+    }
+    public int getAllowance() {
+        return 0;
+    }
+}
+
+class Developer extends Employee {
+    private int baseSalary, rating;
+    // implement Developer class constructor and override getBonus()
+    public Developer(int b, int r) {
+        baseSalary = b;
+        rating = r;
+    }
+    // bonus = baseSalary * rating / 10
+    public int getBonus() {
+        return baseSalary * rating/10;
+    }
+}
+
+class Manager extends Employee {
+    private int teamSize, stipend;
+    // implement Manager class constructor and override getAllowance()
+    Manager(int t, int s) {
+        this.teamSize = t;
+        this.stipend = s;
+    }
+    // allowance = teamSize * stipend
+    public int getAllowance() {
+        return teamSize * stipend;
+    }
+}
+
+class CompanyApp {
+    private static void printCompensation(Employee e) {
+        // check if e is of type Developer and print getBonus()
+        if (e instanceof Developer) {
+            System.out.println(e.getBonus());
+        }
+        // check if e is of type Manager and print getAllowance()
+        if (e instanceof Manager) {
+            System.out.println(e.getAllowance());
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int baseSalary = sc.nextInt();
+        int rating = sc.nextInt();
+        int teamSize = sc.nextInt();
+        int stipend = sc.nextInt();
+        printCompensation(new Developer(baseSalary, rating));
+        printCompensation(new Manager(teamSize, stipend));
+    }
+}
+// ============================
+class BankAccount{
+    int accountNumber;
+    String name;
+    int balance;
+    final int minBalance = 100;
+    private boolean checkMinBalance(int amount){
+        if(balance - amount <= minBalance){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+//Fill the code here
+public BankAccount(int an, String n, int bal) {
+    accountNumber = an;
+    name = n;
+    balance = bal;
+}
+public void deposit(int amount) {
+    balance = balance + amount;
+}
+public void withdraw(int amount) {
+    if (checkMinBalance(amount)) {
+        balance = balance - amount;
+    }
+    else {
+        System.out.println("Transaction Failed!");
+    }
+}
+public void balance(){
+    System.out.println(balance);
+}
+}
+class AccountCheck{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int amnt = sc.nextInt( );
+        int amnt1 = sc.nextInt( );
+        BankAccount b = new BankAccount(1890, "rahul", 1000);
+        b.deposit(amnt);
+        b.balance();
+        b.withdraw(amnt1);
+        b.balance();
+    }
+
+}
+
+// =========================================
+class Shape{
+    public int area() {
+        return 0;
+    }
+    public int volume() {
+        return 0;
+    }
+}
+class Rectangle extends Shape{
+    private int w, h;
+//implement Rectangle class
+public Rectangle(int w, int h) {
+    w = w;
+    h = h;
+}
+public int area() {
+    return w*h;
+}
+}
+class Cube extends Shape {
+    private int a;
+    public Cube (int a) {a = a;}
+    public int area() {return 6*a*a;}
+    public int volume() {return a*a*a;}
+}
+//implement Cube class
+// check if s is of type Rectangle
+class sChecker {
+    public static void caller(Shape s) {
+        if(s instanceof Rectangle) 
+            System.out.println(s.area());
+        if(s instanceof Cube) 
+            System.out.println(s.volume());
+}
+//check if s is of type Cube
+public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int w = sc.nextInt();
+        int h = sc.nextInt();
+        int a = sc.nextInt();
+        caller(new Rectangle(w, h));
+        caller(new Cube(a));
+    }
+}
+
+
+// interface Searchable{
+//     public int search(int start_index, Object key);
+// }
+// class Char{
+//     private char c;
+//     public Char(char c_) {
+//         c = c_;
+//     }
+//     public boolean equals(Object d) {
+// //implement equals() for Char
+//     }
+// }  
+
+// //search the key in array carr from the index start_index
+// //if the key found, return index of the first occurrence of the key
+// //else return -1
+
+// class FClass{
+//     public static void main(String[] args) {
+//         String str;
+//         char c;
+//         Scanner sc = new Scanner(System.in);
+//         str = sc.nextLine();
+//         c = sc.next().charAt(0);
+//         Char key = new Char(c);
+//         Char[] cA = new Char[str.length()]; 
+//         for(int i = 0; i < str.length(); i++) {
+//             cA[i] = new Char(str.charAt(i));
+//         }
+//         CharArray caObj = new CharArray(cA);
+//         System.out.println(FrequencyCounter.getFrequency(caObj, key));
+//     }
+// }
+
+
+abstract class StringOperations{
+  public abstract String reverse(String s);
+  public abstract int vowelCount(String s);
+}
+abstract class StringReverse extends StringOperations{
+  public String reverse(String s){
+    String s1 = "";
+    for(int i = s.length() - 1; i >= 0; i--){
+      s1 = s1 + s.charAt(i);
+    }
+    return s1;
+  }
+}
+
+class UpdatedStrings extends StringReverse{
+  public int vowelCount(String s){
+    int count = 0;
+    char[] arr = {'a','e','i','o','u'};
+    for(int i = 0; i < s.length(); i++){
+      for(int j = 0; j <arr.length; j++){
+        if(s.charAt(i) == arr[j]){
+          count = count + 1; 
+        }
+      }
+    }
+    return count;
+  }
+}
+class Example {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String s = sc.next();
+    UpdatedStrings str = new UpdatedStrings();
+    System.out.println("Reverse of "+ s + " is "+ str.reverse(s));
+    System.out.println("Vowel count of "+ s + " is "+ str.vowelCount(s));
+  }
 }
