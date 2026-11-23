@@ -165,6 +165,7 @@ $$$$
 - :se nu [shows line numbering]
 - :1,5s/line/LINE/ [substitute the first word "line" in each of the lines from 1 to 5]
 - :1,5s/line/LINE/g [all the words "line" from 1 to 5]
+- :%s/line/LINE/gci [case insensitive - asks permission]
 - :%s/line/LINE/g [Replace everywhere]
 - :%s/word1//g [delete all the word1 from the file]
 - p [paste the copied/cut line]
@@ -207,7 +208,7 @@ $$$$
 # What?
 ## What the hell is Symbolic Link and Hard Link?
     Something
-
+ghjgjhjhjghjgjgghgj
 ## What is /dev/null file in the system?
     /dev/null is a file that acts as a black hole for the device. 
     Any input given inside this file is lost.
@@ -350,6 +351,7 @@ Package priorities
 - cat file1 | grep 'M\{3,5\}' [M should appear >=3 and <=5 times together.]
 - cat file1 | grep '\(am\)\{2\}' ['am' must be 2 times together]
 - cat file1 | grep '\(am\)\2' [different from the above ]
+- cat file1 | grep "^\(#\|'\)" [print the lines that start with either # or ']
 - cat file1 | grep '[[:alnum:]]' [prints the line which has either or both apha, numeric characters in it.]
 - cat file1 | grep '^[[:digit:]]' [the line which has first character digit]
 - cat file1 | grep '[^[:cntrl:]]' [the lines which doesn't have any control character]
@@ -362,14 +364,15 @@ Package priorities
 - cat file1 | egrep '(string1 | string2)' [either string1 is present or string2 in the line.]
 - cat file1 | egrep '^$' [prints the empty lines]
 - cat file1 | egrep -v '^$' [skips  the empty lines]
+- cat file1 | egrep -o 'pattern1' [prints only the pattern1 instead of the entire line]
 -------
 - cut -c 2-5 file1 [prints from the 2nd to the 5th character of each line]
 - cut -d ';' -f 2 [prints the 2nd field seperated by the delimitor ';']
 -------
 - find . [finds every file/directory in current directory]
 - find . -type d [types of directories in current directory]
-- find . type f -name "test.txt" [returns the types of all the files having the name "test.txt"]
-- find . type f -name "*.jpg" -maxdepth 1 [return only the directories upto 1st depth and not its further subdirectories]
+- find . -type f -name "test.txt" [returns the types of all the files having the name "test.txt"]
+- find . -maxdepth 1 -type f -name "*.jpg" [return only the directories upto 1st depth and not its further subdirectories]
 - find . -type f -name "tes*" [returns the types of all the files having the name starting from "tes"]
 - find . -type f -iname "tes*" [for case-insensitive searching]
 - find . -type f -mmin -10 [finds files that were modified <10 mins ago]
@@ -380,3 +383,43 @@ Package priorities
 - find . -perm 777 [searches for files having 777 permissions]
 - find directory1 -type d -exec chmod 775 {} + [group all found paths of all the directories inside directory1 and execute chmod 775 once.]
 - find . -type f -name "*.jpg" -maxdepth 1 -exec rm {} + [only delete .txt files of the current directory]
+-------------------------------------
+delete this if not in brain before week6
+<!-- ### echo $
+| Code | Meaning |
+| --- | --- |
+| `0` | Success |
+| `1` | Failure |
+| `2` | Misuse |
+| `126` | Command cannot be executed |
+| `127` | Command not found |
+| `130` | Processes killed using `Control+C` |
+| `137` | Processes killed using `kill -9 <pid>` |
+----
+### `echo $-`
+| Flag | Meaning |
+| --- | --- |
+| `h` | Locate and hash commands |
+| `B` | Brace expansion enabled |
+| `i` | Interactive mode |
+| `m` | Job control enabled |
+| `H` | `!` style history substitution enabled |
+| `s` | Commands are read from `stdin` |
+| `c` | Commands are read from arguments | -->
+
+-----------------
+- echo '$USERNAME' [single quote does not interpret]
+- echo '\$USERNAME' [does not interpret]
+- $PWD [prints present working directory]
+- $0 [current shell/script name]
+- $$ [shell process ID]
+- $HOME [prints Home directory]
+- $PATH [displays directories that are used to search for commands]
+- set [prints everything in the terminal]
+- ksh [goes into the ksh shell]
+- ps -f [current terminal process, includes PPID column]
+- ps -e [all processes, doesn't include PPID]
+- ps -ef [all processes, including PPID]
+- echo ${!var1*} [prints shell variables starting with var1]
+- echo ${#var1} [prints the length of the value of var1 if present otherwise 0]
+- echo ${var1#pattern1} [prints]
