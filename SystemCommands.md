@@ -382,7 +382,7 @@ Package priorities
 - find . -size +5M [searches for files >5MB]
 - find . -perm 777 [searches for files having 777 permissions]
 - find directory1 -type d -exec chmod 775 {} + [group all found paths of all the directories inside directory1 and execute chmod 775 once.]
-- find . -type f -name "*.jpg" -maxdepth 1 -exec rm {} + [only delete .txt files of the current directory]
+- find . -type f -name "*.jpg" -maxdepth 1 -exec rm {} + [only delete .jpg files of the current directory]
 -------------------------------------
 delete this if not in brain before week6
 <!-- ### echo $
@@ -429,7 +429,9 @@ delete this if not in brain before week6
 - echo ${var1:-"str1"} [if var1 is set, display it, else display "str1"]
 - echo ${var1:+"str1"} [if var1 is set, display it, else display NULL]
 - echo ${var1:5:4} [display the 4 characters after skipping the the first 5]
+- echo ${var1: -4:3} [take the last 4chars of var1 and print the first 3]
 - echo ${var1#str1} [prints the value of var1 where str1 is removed from the beggining]
+- echo ${var1%%.*}X{var1##*.} [if var1=abcde.jpg.txt.mp4 it prints abcdeXmp4]
 - echo ${var1%str1} [prints the value of var1 where str1 is removed from the end]
 - echo ${var1/str1/str2} [print value of var1 where first str1 is replaced with str2]
 - echo ${var1//str1/str2} [print value of var1 where all str1 are replaced with str2]
@@ -459,6 +461,6 @@ delete this if not in brain before week6
 
 - export var1 [exports var1 variable from parent to child shell]
 - var1=`date` [command1 inside ` . Here, the value of var1 will always be same as it was at the time of assinging]
-
-
+- date +"%d %B %Y" [prints current date as, 27 November 2026]
+- date +"%d %B %m" [prints current date as, 27 November 11]
 
